@@ -1,0 +1,46 @@
+// overwrites
+$enable-rounded: false;
+
+// bootstrap: required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+// Optional
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/grid";
+
+// Bootstrap UI elements
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/alert";
+@import "../../node_modules/bootstrap/scss/close";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/nav";
+
+// animation
+//@import "../../node_modules/hover.css/scss/hover";
+//@import "../../node_modules/animate.css/animate";
+
+// own styles
+
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
+
+#nav {
+    padding: 30px;
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
