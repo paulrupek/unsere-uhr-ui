@@ -20,7 +20,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:1337/settings/text', {
+        fetch('http://127.0.0.1:8081/settings/text', {
             
         })
         .then(x => x.json())
