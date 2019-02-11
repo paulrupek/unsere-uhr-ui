@@ -1,11 +1,12 @@
 <template>
   <div class="container">
-    <uu-options v-bind:options="options" v-bind:selected.sync="selected" />
-    <div class="row">
-      {{ selected }}
-    </div>
-    <div class="row">
-      <uu-text />
+
+    <div v-for="v in data.Strategies" class="row">
+      <h3 class="col-12">{{ v.title }}</h3>
+      <span class="col-12">{{ v.description }}</span>
+      <uu-options v-bind:options="v.options" 
+                  v-bind:selected.sync="v.id"
+                   />
     </div>
   </div>
 </template>
@@ -22,17 +23,20 @@ export default {
   },
   data: function() {
     return {
-      options: [{
-        id: "ID_A", title: "Id A", thumbnail: "/img/icons/apple-touch-icon-180x180.png", description: "description", selected: false
-      },
-      {
-        id: "ID_B", title: "Id B", thumbnail: "/img/icons/apple-touch-icon-180x180.png", description: "description", selected: false
-      },
-      {
-        id: "ID_C", title: "Id C", thumbnail: "/img/icons/apple-touch-icon-180x180.png", description: "description", selected: false
-      }],
-      selected: 'ID_B'
+      data: {}
     }
+  },
+  mounted() {
+    let component = this
+
+    fetch('http://127.0.0.1:8081/settings/text', {
+        
+    })
+    .then(x => x.json())
+    .then(resp => {
+        component.$data.data = resp
+    })
+    .catch(e => { console.log("error", e)})
   }
 }
 </script>

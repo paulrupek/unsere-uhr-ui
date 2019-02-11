@@ -1,17 +1,33 @@
 <template>
-  <div class="about">
-    <uu-brightness />
-  </div>
+    <div id="text">
+        <h1 class="h1">Brightness settings</h1>
+        <pre>{{ JSON.stringify(data) }}</pre>
+        <h1>Strats</h1>
+        <div v-for="(v, k) in data">
+            {{ v }} : {{ k }}
+        </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Brightness from '@/components/Brightness.vue'
-
 export default {
-  name: 'brightness',
-  components: {
-    'uu-brightness': Brightness
-  }
+    data() {
+        return {
+            data: {},
+
+        }
+    },
+    mounted() {
+        let component = this
+
+        fetch('http://127.0.0.1:8081/settings/brightness', {
+            
+        })
+        .then(x => x.json())
+        .then(resp => {
+            component.data = resp
+        })
+        .catch(e => { console.log("error", e)})
+    }
 }
 </script>
