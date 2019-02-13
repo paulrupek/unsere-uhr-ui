@@ -1,7 +1,7 @@
 <template>
     <div class="optionSelect row">
         <div class="option col-md-3"
-             v-for="option in options"
+             v-for="option in opts"
              v-bind:key="option.id"
              v-on:click="selectOption($event, option)">
             <div class="card" :class="{ selected: option.selected }">
@@ -18,10 +18,26 @@
 <script>
 export default {
     props: ['options', 'selected'],
+    data() {
+        let x = []
+
+        this.$props.options.forEach(e => {
+            x.push({
+                id: e.id,
+                description: e.description,
+                thumbnail: e.thumbnail,
+                title: e.title,
+                selected: false
+            })
+        })
+
+        return {
+            opts: x
+        }
+    },
     methods: {
         selectOption: function(e, o) {
-            // todo: anti-pattern, do not mutate the parent state
-            this.$props.options.forEach(element => {
+            this.$data.opts.forEach(element => {
                 if (element.id !== o.id && element.selected) {
                     element.selected = false
                 }
@@ -32,7 +48,7 @@ export default {
         }
     },
     created() {
-        this.$props.options.forEach(element => {
+        this.$data.opts.forEach(element => {
             if (element.id === this.$props.selected) {
                 element.selected = true
             }

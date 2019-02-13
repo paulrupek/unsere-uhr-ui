@@ -1,29 +1,47 @@
 <template>
   <div class="container">
 
-    <div v-for="v in data.Strategies" class="row">
+    <div v-for="v in data.Strategies" class="row" :key="v.id">
       <h3 class="col-12">{{ v.title }}</h3>
       <span class="col-12">{{ v.description }}</span>
-      <uu-options v-bind:options="v.options" 
-                  v-bind:selected.sync="v.id"
-                   />
+      <uu-options :options="v.options" 
+                  :selected.sync="data[v.id]"
+                  @update:selected="selectionUpdated"
+                  />
+    </div>
+    <div class="row">
+      <button @click="save" type="button" class="btn btn-primary" :disabled="disabled">Save</button>
     </div>
   </div>
 </template>
 
 <script>
-import Text from '@/components/Text.vue'
 import OptionSelect from '@/components/OptionSelect.vue'
 
 export default {
-  name: 'text',
+  name: 'TextSettings',
   components: {
-    'uu-text': Text,
     'uu-options': OptionSelect
+  },
+  methods: {
+    selectionUpdated() {
+      this.$data.disabled = false
+    },
+    save() {
+      let results = {}
+
+      this.$data.data.Strategies.forEach(element => {
+        results[element.id] = this.$data.data[element.id]
+      });
+
+      // todo: post this
+      //console.log("submit", results)
+    }
   },
   data: function() {
     return {
-      data: {}
+      data: {},
+      disabled: true
     }
   },
   mounted() {
@@ -36,7 +54,9 @@ export default {
     .then(resp => {
         component.$data.data = resp
     })
-    .catch(e => { console.log("error", e)})
+    .catch(() => { 
+
+    })
   }
 }
 </script>
