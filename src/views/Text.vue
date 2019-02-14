@@ -10,6 +10,12 @@
                   />
     </div>
     <div class="row">
+      <uu-alert class="col-12" type="success" ref="successAlert">
+        Die Einstellungen wurden erfolgreich angepasst.
+      </uu-alert>
+      <uu-alert class="col-12" type="error" ref="errorAlert">
+        Ein Fehler ist beim Speichern aufgetreten.
+      </uu-alert>
       <button @click="save" type="button" class="btn btn-primary" :disabled="disabled">Save</button>
     </div>
   </div>
@@ -17,11 +23,13 @@
 
 <script>
 import OptionSelect from '@/components/OptionSelect.vue'
+import Alert from '@/components/Alert.vue'
 
 export default {
   name: 'TextSettings',
   components: {
-    'uu-options': OptionSelect
+    'uu-options': OptionSelect,
+    'uu-alert': Alert
   },
   methods: {
     selectionUpdated() {
@@ -34,8 +42,19 @@ export default {
         results[element.id] = this.$data.data[element.id]
       });
 
-      // todo: post this
-      //console.log("submit", results)
+      fetch('http://127.0.0.1:8081/settings/text', {
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(results)
+      })
+      .then(r => r.json())
+      .then(r => {
+        this.$refs.successAlert.open()
+      })
+      .catch(error => console.log(error))
     }
   },
   data: function() {
