@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <div v-for="v in data.Strategies" class="row" :key="v.id">
       <h3 class="col-12">{{ v.title }}</h3>
       <span class="col-12">{{ v.description }}</span>
@@ -36,12 +35,18 @@ export default {
       this.$data.disabled = false
     },
     save() {
+      // hide alerts, if present
+      this.$refs.successAlert.close()
+      this.$refs.errorAlert.close()
+      
+      // get results
       let results = {}
 
       this.$data.data.Strategies.forEach(element => {
         results[element.id] = this.$data.data[element.id]
       });
 
+      // PUT settings
       fetch('http://127.0.0.1:8081/settings/text', {
         method: 'put',
         headers: {
@@ -52,9 +57,15 @@ export default {
       })
       .then(r => r.json())
       .then(r => {
-        this.$refs.successAlert.open()
+        if (r && r.success) {
+          this.$refs.successAlert.open()
+        } else {
+          this.$refs.errorAlert.open()
+        }
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        this.$refs.errorAlert.open()
+      })
     }
   },
   data: function() {
