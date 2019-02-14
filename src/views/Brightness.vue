@@ -3,7 +3,7 @@
         <h1 class="h1">Brightness settings</h1>
         <pre>{{ JSON.stringify(data) }}</pre>
         <h1>Strats</h1>
-        <div v-for="(v, k) in data">
+        <div v-for="(v, k) in data" :key="k">
             {{ v }} : {{ k }}
         </div>
     </div>
@@ -27,7 +27,9 @@ export default {
         .then(resp => {
             component.data = resp
         })
-        .catch(e => { console.log("error", e)})
+        .catch(() => { 
+
+        })
     }
 }
 </script>

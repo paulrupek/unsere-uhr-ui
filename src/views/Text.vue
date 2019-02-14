@@ -63,7 +63,7 @@ export default {
           this.$refs.errorAlert.open()
         }
       })
-      .catch(error => {
+      .catch(() => {
         this.$refs.errorAlert.open()
       })
     }
