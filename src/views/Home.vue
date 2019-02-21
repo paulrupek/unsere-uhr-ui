@@ -2,7 +2,7 @@
   <div class="home container">
     <div class="row">
       <div class="col-md-6">
-        <uu-clock></uu-clock>
+        <uu-clock :leds="clockStatus.ledValues" :configuration="ledLayout"></uu-clock>
       </div>
     </div>
     
@@ -16,7 +16,9 @@ export default {
   name: 'home',
   data: function () {
     return {
-      clockStatus: []
+      clockStatus: [],
+      ledLayout: null,
+      intervalId: null
     }
   },
   components: {
@@ -25,15 +27,26 @@ export default {
   mounted() {
     let component = this
 
-    fetch('http://127.0.0.1:8081/status/clock')
+    fetch('http://127.0.0.1:8081/settings/led-layout')
     .then(x => x.json())
     .then(resp => {
-        component.$data.clockStatus = resp
-        console.log("wtf", component.$data.clockStatus.ledValues)
+      component.$data.ledLayout = resp
     })
-    .catch(e => { 
-      console.log(e)
-    })
+    .catch(e => console.log(e))
+
+    this.$data.intervalId = setInterval(() => {
+      fetch('http://127.0.0.1:8081/status/clock')
+      .then(x => x.json())
+      .then(resp => {
+          component.$data.clockStatus = resp
+      })
+      .catch(e => { 
+        console.log(e)
+      })
+    }, 5000)
+  },
+  beforeDestroy() {
+    clearInterval(this.$data.intervalId)
   }
 }
 </script>
