@@ -23,4 +23,8 @@
   padding: 1rem;
   color: rgba(255, 255, 255, 0.8);
 }
+
+#main-container {
+  overflow-x: hidden;
+}
 </style>

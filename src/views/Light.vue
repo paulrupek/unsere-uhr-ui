@@ -1,10 +1,86 @@
 <template>
-    <div id="text">
-        <h1 class="h1">Light settings</h1>
-        <pre>{{ JSON.stringify(data) }}</pre>
-        <h1>Strats</h1>
-        <div v-for="(v, k) in data" :key="k">
-            {{ v }} : {{ k }}
+    <div id="text container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h1">Umgebungslicht</h1>
+            </div>
+            <div class="col-12 col-lg-6">
+                <p>
+                    Hier kann der Umgebungslichtsensor und dessen Einfluss auf
+                    die Helligkeit der LED-Anzeige eingestellt werden. Dabei 
+                    werden die Helligkeitswerte einer einstellbaren Zeitspanne
+                    aufgezeichnet. Aus diesen Werten wird ein gewichteter Durchschnitt
+                    berechnet und anschließend auf einen Wert zwischen 0 und 1 skaliert.
+                </p>
+
+                <p>
+                    Folgende Werte sind bei der Berechnung von Bedeutung:
+                    <ul>
+                        <li>
+                            <strong>Zeitspanne</strong><br />
+                            Dieser Wert legt fest welches Zeitfenster für die Berechnung
+                            berücksichtigt wird. Größere Werte bewirken eine höhere Verzögerung
+                            bei der Anpassung an das Umgebungslicht. Kleinere Werte hingegen
+                            können hingegen ein Flackern der Helligkeit bewirken. Werte zwischen
+                            zwei und fünf Minuten sollten in den meisten Fällen ausreichen. Dieser
+                            Wert wird in Minuten erfasst.
+                        </li>
+                        <li>
+                            <strong>Leseintervall</strong><br />
+                            Reguliert die Häufigkeit mit welcher der Helligkeitssensor gelesen wird.
+                            Der Wert wird in Millisekunden erfasst. Bei zu geringen Werten kann es sein,
+                            dass die Hardware nicht hinterher kommt. Zu beachten ist auch, dass
+                            dies die Menge an Messpunkten die vorliegen steuert.
+                        </li>
+                        <li>
+                            <strong>Minimum</strong><br />
+                            Der Sensor liefert theoretisch Werte zwischen 0 und 1, was jedoch durch verschiedene 
+                            Faktoren beeinflusst werden kann. Deswegen wird der tatsächliche Wert zwischen einer
+                            oberen und einer unteren Schranke skaliert. Beispielsweise kann es sein, dass es zwar 
+                            Restlicht im Zimmer gibt, ihr aber dennoch auf die geringste Helligkeitsstufe skalieren 
+                            möchtet.In diesem Fall bietet es sich an diesen Wert anzuheben.
+                        </li>
+                        <li>
+                            <strong>Maximum</strong><br />
+                            Analog zum Minimum ist dies die obere Grenze für die Skalierung. Bei einigen Uhren haben
+                            wir hohe Widerstände vor den Sensor gelötet, weswegen nur Werte &lt; 0.6 gelesen werden.
+                            Bei anderen steht die Uhr ggfs. etwas schattiger oder der Sensor wird leicht verdeckt. 
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h3>Einstellungen</h3>
+            </div>
+            <div class="col-5 col-lg-5">
+                <form action="#">
+                    <div class="form-group">
+                        <label for="timeSpan">Zeitspanne</label>
+                        <input id="timeSpan" class="form-control" v-model.number="data.timeSpan" type="number" min="1" max="60">
+                        <small id="timeSpanHelp" class="form-text text-muted">Erfassung in Minuten. Der Standardwert beträgt 5 Minuten.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="readInterval">Leseintervall</label>
+                        <input id="readInterval" class="form-control" v-model.number="data.readInterval" type="number" min="50" step="10">
+                        <small id="readIntervalHelp" class="form-text text-muted">Erfassung in Millisekunden. Der Standardwert beträgt 100ms.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="minimum">Minimum</label>
+                        <input id="minimum" class="form-control" v-model.number="data.minimum" type="number" min="0" max="1" step="0.05">
+                        <small id="minimumHelp" class="form-text text-muted">Der Standardwert beträgt 0.0.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="maximum">Maximum</label>
+                        <input id="maximum" class="form-control" v-model.number="data.maximum" type="number" min="0" max="1" step="0.05">
+                        <small id="maximumHelp" class="form-text text-muted">Der Standardwert beträgt 0.5.</small>
+                    </div>
+                    <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
+                    <br><br>
+                </form>
+            </div>
         </div>
     </div>
 </template>
@@ -29,6 +105,17 @@ export default {
         .catch(() => { 
 
         })
+    },
+    methods: {
+        submitData() {
+
+        }
     }
 }
 </script>
+
+<style>
+li {
+    margin-bottom: 0.4rem;
+}
+</style>
