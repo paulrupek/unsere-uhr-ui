@@ -1,6 +1,6 @@
 // overwrites
 $enable-rounded: false;
-
+/*
 // bootstrap: required
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
@@ -20,6 +20,12 @@ $enable-rounded: false;
 @import "../../node_modules/bootstrap/scss/close";
 @import "../../node_modules/bootstrap/scss/transitions";
 @import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/list-group";
+
+@import "../../node_modules/bootstrap/scss/media";
+*/
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 // animation
 //@import "../../node_modules/hover.css/scss/hover";
@@ -34,13 +40,29 @@ $enable-rounded: false;
     color: #2c3e50;
 }
 
+#main-container {
+  margin-left: 22rem;
+  padding-top: 0.6rem;
+}
+
 #nav {
-    padding: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #42b983;
-      }
+  height:100vh;
+  background: rgb(36, 36, 37);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20rem;
+
+  box-shadow:  0px 0px 12px 0px rgba(0,0,0,0.75);
+
+  .list-group-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      border-left: solid #6e4ec4 5px;
+      background-color:  rgba(255, 255, 255, 0.3);
     }
   }
+}

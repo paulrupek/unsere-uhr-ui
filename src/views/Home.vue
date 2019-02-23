@@ -1,11 +1,15 @@
 <template>
-  <div class="home container">
+  <div class="home container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1>Aktelle Uhrzeit</h1>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-6">
         <uu-clock :leds="clockStatus.ledValues" :configuration="ledLayout"></uu-clock>
       </div>
     </div>
-    
   </div>
 </template>
 

@@ -1,6 +1,11 @@
 <template>
-  <div class="container">
-    <div v-for="v in data.Strategies" class="row" :key="v.id">
+  <div class="container-fluid text-settings">
+    <div class="row">
+      <div class="col-12">
+        <h1>Anzeigeeinstellungen</h1>
+      </div>
+    </div>
+    <div v-for="v in data.Strategies" class="row option-row" :key="v.id">
       <h3 class="col-12">{{ v.title }}</h3>
       <span class="col-12">{{ v.description }}</span>
       <uu-options :options="v.options" 
@@ -90,3 +95,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.option-row {
+  border-left: 3px solid #2c3e506b;
+  margin-bottom: 2rem;
+  margin-left: 0.5rem;
+  padding-bottom: 2px;
+}
+
+.text-settings span {
+  margin-bottom: 0.6rem;
+}
+</style>
