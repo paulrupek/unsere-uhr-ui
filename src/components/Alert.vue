@@ -20,7 +20,7 @@ export default {
             return {
                 'alert-success': this.$props.type === 'success',
                 'alert-warning': this.$props.type === 'warning',
-                'alert-error': this.$props.type === 'error'
+                'alert-danger': this.$props.type === 'error'
             }
         }
     },

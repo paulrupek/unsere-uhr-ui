@@ -11,10 +11,10 @@
                     werden die Helligkeitswerte einer einstellbaren Zeitspanne
                     aufgezeichnet. Aus diesen Werten wird ein gewichteter Durchschnitt
                     berechnet und anschließend auf einen Wert zwischen 0 und 1 skaliert.
+                    Folgende Werte sind bei der Berechnung von Bedeutung:
                 </p>
 
                 <p>
-                    Folgende Werte sind bei der Berechnung von Bedeutung:
                     <ul>
                         <li>
                             <strong>Zeitspanne</strong><br />
@@ -48,6 +48,11 @@
                         </li>
                     </ul>
                 </p>
+
+                <p>
+                    Zu beachten ist auch, dass der Helligkeitssensor nicht berücksichtigt wird, falls in den
+                    <router-link to="/brightness">Helligkeitseinstellungen</router-link> ein fester Wert eingestellt wurde.
+                </p>
             </div>
         </div>
 
@@ -77,6 +82,12 @@
                         <input id="maximum" class="form-control" v-model.number="data.maximum" type="number" min="0" max="1" step="0.05">
                         <small id="maximumHelp" class="form-text text-muted">Der Standardwert beträgt 0.5.</small>
                     </div>
+                    <uu-alert type="success" ref="successAlert">
+                        Die Einstellungen wurden erfolgreich angepasst.
+                    </uu-alert>
+                    <uu-alert type="error" ref="errorAlert">
+                        Ein Fehler ist beim Speichern aufgetreten.
+                    </uu-alert>
                     <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
                     <br><br>
                 </form>
@@ -86,7 +97,12 @@
 </template>
 
 <script>
+import Alert from '@/components/Alert.vue'
+
 export default {
+    components: {
+        'uu-alert': Alert
+    },
     data() {
         return {
             data: {}
@@ -107,8 +123,33 @@ export default {
         })
     },
     methods: {
-        submitData() {
+        submitData(e) {
+            // hide alerts, if present
+            this.$refs.successAlert.close()
+            this.$refs.errorAlert.close()
 
+            // PUT data
+            fetch('http://127.0.0.1:8081/settings/light', {
+                method: 'put',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.$data.data)
+            })
+            .then(r => r.json())
+            .then(r => {
+                if (r && r.success) {
+                    this.$refs.successAlert.open()
+                } else {
+                    this.$refs.errorAlert.open()
+                }
+            })
+            .catch(() => {
+                this.$refs.errorAlert.open()
+            })
+
+            e.preventDefault()
         }
     }
 }
