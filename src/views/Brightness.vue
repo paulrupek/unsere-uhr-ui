@@ -1,5 +1,11 @@
 <template>
-    <div id="text">
+    <div id="brightness container">
+
+
+
+
+
+        
         <h1 class="h1">Brightness settings</h1>
         <pre>{{ JSON.stringify(data) }}</pre>
         <h1>Strats</h1>
