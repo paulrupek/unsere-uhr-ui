@@ -183,7 +183,8 @@ function toQueryString(classes) {
 export default {
     props: {
         leds: [Object, Array],
-        configuration: Object
+        configuration: Object,
+        color: Number
     },
     computed: {
         activeClasses: function () {
@@ -210,9 +211,14 @@ export default {
     mounted() {
         window.addEventListener('resize', resizeBehaviour)
         resizeBehaviour()
+        
         this.$watch('activeClasses', (newValue, oldValue) => {
             document.querySelectorAll(toQueryString(oldValue)).forEach(x => x.style.color = initialColor)
             document.querySelectorAll(toQueryString(newValue)).forEach(x => x.style.color = 'white')
+        })
+
+        this.$watch('color', (newValue, oldValue) => {
+            document.querySelectorAll('.clock .col, .clock .col-1').forEach(x => x.style.color = `#${newValue.toString(16)}`)
         })
     },
     beforeDestroy() {

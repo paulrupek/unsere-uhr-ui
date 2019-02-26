@@ -2,6 +2,11 @@
   <div id="app">
     <div id="nav">
       <h2>Unsere Uhr</h2>
+      <div class="d-block d-sm-none">XS</div>
+      <div class="d-none d-sm-block d-md-none">SM</div>
+      <div class="d-none d-md-block d-lg-none">MD</div>
+      <div class="d-none d-lg-block d-xl-none">LG</div>
+      <div class="d-none d-xl-block">XL</div>
       <div class="list-group-flush">
         <router-link class="list-group-item list-group-item-action" to="/">Home</router-link>
         <router-link class="list-group-item list-group-item-action" to="/text">Anzeigeeinstellungen</router-link>

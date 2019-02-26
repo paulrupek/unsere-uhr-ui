@@ -11,14 +11,23 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row spacer-bottom">
             <div class="col-lg-6 col-12">
                 <h3>Gesamte Uhr</h3>
-                <div id="colorPickerClock"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9">
+                            <uu-clock :color="color"></uu-clock>
+                        </div>
+                        <div class="col-3">
+                            <div id="colorPickerClock"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row spacer-bottom">
             <div class="col-lg-6 col-12">
                 <h3>Individuelle LEDs</h3>
                 <form>
@@ -30,7 +39,7 @@
                             {{ k }}
                         </option>
                     </select><br>
-                    <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ data[selectedLed] }}</p>
+                    <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ '#' + data[selectedLed].toString(16) }}</p>
                     <button type="submit" class="btn btn-primary mb-2">Speichern</button>
                 </div>
             </form>
@@ -40,13 +49,18 @@
 </template>
 
 <script>
+import Clock from '@/components/Clock.vue'
 const AColorPicker = require('a-color-picker')
 
 export default {
+    components: {
+        'uu-clock': Clock
+    },
     data() {
         return {
             data: {},
-            selectedLed: -1
+            selectedLed: -1,
+            color: '#ffffff'
         }
     },
     methods: {
@@ -58,6 +72,8 @@ export default {
                     this.$data.data[key] = newColor
                 }
             }
+
+            this.$data.color = newColor
         },
         getMajorityColor(colors) {
             let counter = {}
@@ -91,13 +107,14 @@ export default {
         .then(x => x.json())
         .then(resp => {
             component.data = resp
+            this.$data.color = '#' + component.getMajorityColor(resp).toString(16)
 
             component._colorPicker = AColorPicker.createPicker('#colorPickerClock', {
                 showHSL: false,
                 showRGB: true,
                 showHEX: true,
                 showAlpha: false,
-                color: '#' + component.getMajorityColor(resp).toString(16),
+                color: this.$data.color,
                 palette: 'PALETTE_MATERIAL_CHROME',
                 paletteEditable: false,
                 useAlphaInPalette: false
@@ -114,3 +131,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.spacer-bottom {
+    margin-bottom: 1rem;
+}
+</style>
