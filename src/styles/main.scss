@@ -1,5 +1,26 @@
 // overwrites
 $enable-rounded: false;
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$grid-breakpoints: map-merge(
+  (
+    xxl: 1600px
+  ),
+  $grid-breakpoints
+);
+
+$container-max-widths: map-merge(
+  (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xxl: 1540px
+  ),
+  $container-max-widths
+);
+
 /*
 // bootstrap: required
 @import "../../node_modules/bootstrap/scss/functions";
