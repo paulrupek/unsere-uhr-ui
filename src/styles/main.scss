@@ -62,8 +62,8 @@ $container-max-widths: map-merge(
 }
 
 #main-container {
-  margin-left: 22rem;
   padding-top: 0.6rem;
+  min-height: 100vh;
 }
 
 #nav {
@@ -71,7 +71,6 @@ $container-max-widths: map-merge(
   background: rgb(36, 36, 37);
   position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
   width: 20rem;
 
