@@ -1,5 +1,5 @@
 <template>
-    <div id="brightness container">
+    <div id="brightness" class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <h1>Helligkeit</h1>

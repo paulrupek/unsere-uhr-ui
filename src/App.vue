@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+    
+    <div id="header">
+      <button id="toggleButton" type="button" class="btn btn-outline-secondary d-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
+    </div>
     <div id="nav">
-      <h2>Unsere Uhr</h2>
       <div class="d-block d-sm-none">XS</div>
       <div class="d-none d-sm-block d-md-none">SM</div>
       <div class="d-none d-md-block d-lg-none">MD</div>
@@ -17,7 +20,6 @@
       </div>
     </div>
     <div id="main-container">
-      <input type="button" value="sdf" @click="toggleNavigation" />
       <router-view />
     </div>
   </div>
@@ -37,7 +39,29 @@ export default {
       tolerance: 70
     })
 
-    console.log(this.slideout, offset)
+    let fixed = document.querySelector('#header');
+
+    this.slideout.on('translate', (translated) => {
+      fixed.style.transform = 'translateX(' + translated + 'px)'
+    })
+
+    this.slideout.on('beforeopen', () => {
+      fixed.style.transition = 'transform 300ms ease'
+      fixed.style.transform = `translateX(${offset}px)`
+    })
+
+    this.slideout.on('beforeclose', () => {
+      fixed.style.transition = 'transform 300ms ease';
+      fixed.style.transform = 'translateX(0px)';
+    })
+
+    this.slideout.on('open', () => {
+      fixed.style.transition = '';
+    })
+
+    this.slideout.on('close', () => {
+      fixed.style.transition = '';
+    })
   },
   methods: {
     toggleNavigation() {
@@ -47,9 +71,22 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 @import "./styles/main.scss";
+
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #292930;
+  min-height: 2rem;
+  z-index: 100;
+}
+
+#main-container {
+  padding-top: 4rem;
+  box-shadow:  0px 0px 12px 0px rgba(0,0,0,0.75);
+}
 
 #nav > h2 {
   padding: 1rem;
@@ -60,42 +97,8 @@ export default {
   overflow-x: hidden;
 }
 
-
-
-
-
-
-      body {
-        width: 100%;
-        height: 100%;
-      }
-
-      .slideout-menu {
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 0;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        display: none;
-      }
-
-      .slideout-panel {
-        position: relative;
-        z-index: 1;
-        will-change: transform;
-        background-color: whitesmoke;
-      }
-
-      .slideout-open,
-      .slideout-open body,
-      .slideout-open .slideout-panel {
-        overflow: hidden;
-      }
-
-      .slideout-open .slideout-menu {
-        display: block;
-      }
+#toogleButton, #toggleButton:focus, #toggleButton:active {
+  outline-width: 0;
+  box-shadow: none;
+}
 </style>
