@@ -2,9 +2,11 @@
   <div id="app">
     
     <div id="header">
-      <button id="toggleButton" type="button" class="btn btn-outline-secondary d-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
+      <button id="toggleButton" type="button" class="btn btn-outline-secondary d-inline-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
+      <div class="btn btn-lg">.</div>
     </div>
     <div id="nav">
+      <h4>Navigation</h4>	
       <div class="d-block d-sm-none">XS</div>
       <div class="d-none d-sm-block d-md-none">SM</div>
       <div class="d-none d-md-block d-lg-none">MD</div>
@@ -74,23 +76,27 @@ export default {
 <style lang="scss">
 @import "./styles/main.scss";
 
+#nav {
+  z-index: -1;
+}
+
 #header {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: #292930;
   min-height: 2rem;
-  z-index: 100;
+  z-index: 21;
 }
 
 #main-container {
   padding-top: 4rem;
   box-shadow:  0px 0px 12px 0px rgba(0,0,0,0.75);
+  z-index: 20;
 }
 
-#nav > h2 {
+#nav > h4 {
   padding: 1rem;
-  color: rgba(255, 255, 255, 0.8);
 }
 
 #main-container {

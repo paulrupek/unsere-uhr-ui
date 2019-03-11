@@ -92,12 +92,13 @@ $container-max-widths: map-merge(
   }
 
   #main-container {
-    padding-left: 22rem;
+    margin-left: 20rem;
     transform: initial !important;
   }
 
   #header {
     transform: initial !important;
+    margin-left: 20rem;
   }
 }
 
