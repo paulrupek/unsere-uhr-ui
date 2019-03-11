@@ -2,9 +2,7 @@
     <div id="text" class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1 class="h1">Umgebungslicht</h1>
-            </div>
-            <div class="col-12 col-lg-6">
+                <h1>Umgebungslicht</h1>
                 <p>
                     Hier kann der Umgebungslichtsensor und dessen Einfluss auf
                     die Helligkeit der LED-Anzeige eingestellt werden. Dabei 
@@ -13,7 +11,42 @@
                     berechnet und anschließend auf einen Wert zwischen 0 und 1 skaliert.
                     Folgende Werte sind bei der Berechnung von Bedeutung:
                 </p>
-
+            </div>
+            <div class="col-12 col-lg-10 col-xl-9 col-xxl-6">
+                <h3>Einstellungen</h3>
+                <form action="#">
+                    <div class="form-group">
+                        <label for="timeSpan">Zeitspanne</label>
+                        <input id="timeSpan" class="form-control" v-model.number="data.timeSpan" type="number" min="1" max="60">
+                        <small id="timeSpanHelp" class="form-text text-muted">Erfassung in Minuten. Der Standardwert beträgt 5 Minuten.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="readInterval">Leseintervall</label>
+                        <input id="readInterval" class="form-control" v-model.number="data.readInterval" type="number" min="50" step="10">
+                        <small id="readIntervalHelp" class="form-text text-muted">Erfassung in Millisekunden. Der Standardwert beträgt 100ms.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="minimum">Minimum</label>
+                        <input id="minimum" class="form-control" v-model.number="data.minimum" type="number" min="0" max="1" step="0.05">
+                        <small id="minimumHelp" class="form-text text-muted">Der Standardwert beträgt 0.0.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="maximum">Maximum</label>
+                        <input id="maximum" class="form-control" v-model.number="data.maximum" type="number" min="0" max="1" step="0.05">
+                        <small id="maximumHelp" class="form-text text-muted">Der Standardwert beträgt 0.5.</small>
+                    </div>
+                    <uu-alert type="success" ref="successAlert">
+                        Die Einstellungen wurden erfolgreich angepasst.
+                    </uu-alert>
+                    <uu-alert type="error" ref="errorAlert">
+                        Ein Fehler ist beim Speichern aufgetreten.
+                    </uu-alert>
+                    <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
+                    <br><br>
+                </form>
+            </div>
+            <div class="col-12 col-lg-10 col-xl-9 col-xxl-6">
+                <h3>Erläuterungen</h3>
                 <p>
                     <ul>
                         <li>
@@ -53,44 +86,6 @@
                     Zu beachten ist auch, dass der Helligkeitssensor nicht berücksichtigt wird, falls in den
                     <router-link to="/brightness">Helligkeitseinstellungen</router-link> ein fester Wert eingestellt wurde.
                 </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <h3>Einstellungen</h3>
-            </div>
-            <div class="col-5 col-lg-5">
-                <form action="#">
-                    <div class="form-group">
-                        <label for="timeSpan">Zeitspanne</label>
-                        <input id="timeSpan" class="form-control" v-model.number="data.timeSpan" type="number" min="1" max="60">
-                        <small id="timeSpanHelp" class="form-text text-muted">Erfassung in Minuten. Der Standardwert beträgt 5 Minuten.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="readInterval">Leseintervall</label>
-                        <input id="readInterval" class="form-control" v-model.number="data.readInterval" type="number" min="50" step="10">
-                        <small id="readIntervalHelp" class="form-text text-muted">Erfassung in Millisekunden. Der Standardwert beträgt 100ms.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="minimum">Minimum</label>
-                        <input id="minimum" class="form-control" v-model.number="data.minimum" type="number" min="0" max="1" step="0.05">
-                        <small id="minimumHelp" class="form-text text-muted">Der Standardwert beträgt 0.0.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="maximum">Maximum</label>
-                        <input id="maximum" class="form-control" v-model.number="data.maximum" type="number" min="0" max="1" step="0.05">
-                        <small id="maximumHelp" class="form-text text-muted">Der Standardwert beträgt 0.5.</small>
-                    </div>
-                    <uu-alert type="success" ref="successAlert">
-                        Die Einstellungen wurden erfolgreich angepasst.
-                    </uu-alert>
-                    <uu-alert type="error" ref="errorAlert">
-                        Ein Fehler ist beim Speichern aufgetreten.
-                    </uu-alert>
-                    <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
-                    <br><br>
-                </form>
             </div>
         </div>
     </div>

@@ -1,23 +1,30 @@
 <template>
     <div class="container-fluid">
     <div class="optionSelect row">
-        <div class="option col-md-4"
+        <div class="option d-sm-none col-6"
              v-for="option in opts"
              v-bind:key="option.id"
              v-on:click="selectOption($event, option)">
-            <!--div class="card" :class="{ selected: option.selected }">
+             
+            <div class="card" :class="{ selected: option.selected }">
                 <img class="card-img-top" :src="option.thumbnail" :alt="option.title">
                 <div class="card-body">
                     <h5 class="card-title">{{ option.title }}</h5>
                     <p class="card-text">{{ option.description }}</p>
                 </div>
-            </div-->
+            </div>
+        </div>
+
+        <div class="option d-none d-sm-block col-sm-6 col-xxl-4"
+             v-for="option in opts"
+             v-bind:key="option.id"
+             v-on:click="selectOption($event, option)">
 
             <div class="media" :class="{ selected: option.selected }">
                 <img width="35%" height="35%" class="mr-3" :src="option.thumbnail" :alt="option.title">
                 <div class="media-body">
-                    <h5 class="mt-0">{{ option.title }}</h5>
-                    {{ option.description }}
+                    <h6 class="mt-0">{{ option.title }}</h6>
+                    <small>{{ option.description }}</small>
                 </div>
             </div>
         </div>
@@ -70,7 +77,7 @@ export default {
 
 <style scoped>
 .selected {
-    border: 2px blue solid;
+    background-color: rgba(23, 212, 64, 0.308);
 }
 
 .option {

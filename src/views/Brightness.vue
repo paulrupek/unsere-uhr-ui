@@ -10,7 +10,7 @@
                 </p>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-md-8 col-xl-7 col-xxl-5">
                 <uu-alert type="success" ref="successAlert">
                     Die Einstellungen wurden erfolgreich angepasst.
                 </uu-alert>

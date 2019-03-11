@@ -13,14 +13,16 @@
                   @update:selected="selectionUpdated"
                   />
     </div>
-    <div class="row">
-      <uu-alert class="col-12" type="success" ref="successAlert">
-        Die Einstellungen wurden erfolgreich angepasst.
-      </uu-alert>
-      <uu-alert class="col-12" type="error" ref="errorAlert">
-        Ein Fehler ist beim Speichern aufgetreten.
-      </uu-alert>
-      <button @click="save" type="button" class="btn btn-primary" :disabled="disabled">Save</button>
+    <div class="row lastrow">
+      <div class="col-12 col-lg-10 col-xl-9 col-xxl-6">
+        <uu-alert type="success" ref="successAlert">
+          Die Einstellungen wurden erfolgreich angepasst.
+        </uu-alert>
+        <uu-alert type="error" ref="errorAlert">
+          Ein Fehler ist beim Speichern aufgetreten.
+        </uu-alert>
+        <button @click="save" type="button" class="btn btn-primary" :disabled="disabled">Save</button>
+      </div>
     </div>
   </div>
 </template>
@@ -98,10 +100,13 @@ export default {
 
 <style lang="scss" scoped>
 .option-row {
-  border-left: 3px solid #2c3e506b;
+  background-color: #2c3e5010;
   margin-bottom: 2rem;
-  margin-left: 0.5rem;
   padding-bottom: 2px;
+}
+
+.lastrow {
+  margin-bottom: 2rem;
 }
 
 .text-settings span {

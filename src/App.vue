@@ -3,16 +3,10 @@
     
     <div id="header">
       <button id="toggleButton" type="button" class="btn btn-outline-secondary d-inline-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
-      <div class="btn btn-lg">.</div>
+      <div class="btn btn-lg disabled">.</div>
     </div>
     <div id="nav">
       <h4>Navigation</h4>	
-      <div class="d-block d-sm-none">XS</div>
-      <div class="d-none d-sm-block d-md-none">SM</div>
-      <div class="d-none d-md-block d-lg-none">MD</div>
-      <div class="d-none d-lg-block d-xl-none">LG</div>
-      <div class="d-none d-xl-block d-xxl-none">XL</div>
-      <div class="d-none d-xxl-block">XXL</div>
       <div class="list-group-flush">
         <router-link class="list-group-item list-group-item-action" to="/">Home</router-link>
         <router-link class="list-group-item list-group-item-action" to="/text">Anzeigeeinstellungen</router-link>
@@ -20,6 +14,12 @@
         <router-link class="list-group-item list-group-item-action" to="/light">Umgebungslicht</router-link>
         <router-link class="list-group-item list-group-item-action" to="/brightness">Helligkeit</router-link>
       </div>
+      <div class="d-block d-sm-none">XS</div>
+      <div class="d-none d-sm-block d-md-none">SM</div>
+      <div class="d-none d-md-block d-lg-none">MD</div>
+      <div class="d-none d-lg-block d-xl-none">LG</div>
+      <div class="d-none d-xl-block d-xxl-none">XL</div>
+      <div class="d-none d-xxl-block">XXL</div>
     </div>
     <div id="main-container">
       <router-view />
@@ -77,7 +77,7 @@ export default {
 @import "./styles/main.scss";
 
 #nav {
-  z-index: -1;
+  z-index: 1;
 }
 
 #header {
@@ -86,13 +86,14 @@ export default {
   width: 100%;
   background-color: #292930;
   min-height: 2rem;
-  z-index: 21;
+  z-index: 3;
 }
 
 #main-container {
   padding-top: 4rem;
   box-shadow:  0px 0px 12px 0px rgba(0,0,0,0.75);
-  z-index: 20;
+  z-index: 2;
+  position: relative;
 }
 
 #nav > h4 {
