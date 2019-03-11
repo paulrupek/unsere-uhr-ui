@@ -14,9 +14,6 @@ $grid-breakpoints: map-merge(
 
 $container-max-widths: map-merge(
   (
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
     xxl: 1540px
   ),
   $container-max-widths
@@ -99,6 +96,7 @@ $container-max-widths: map-merge(
   #header {
     transform: initial !important;
     margin-left: 20rem;
+    padding-right: 20rem;
   }
 }
 

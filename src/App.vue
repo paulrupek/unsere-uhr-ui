@@ -1,9 +1,20 @@
 <template>
   <div id="app">
-    
     <div id="header">
-      <button id="toggleButton" type="button" class="btn btn-outline-secondary d-inline-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
-      <div class="btn btn-lg disabled">.</div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <button id="toggleButton" type="button" class="btn btn-outline-secondary d-inline-block d-lg-none btn-lg" @click="toggleNavigation">☰</button>
+          </div>
+          <div id="headerClock" class="col-6">
+            <strong>{{ hours }}</strong>{{ minutes }}
+          </div>
+          <div class="col-3">
+            <div class="d-none d-lg-inline-block btn btn-lg disabled">.</div>
+          </div>
+        </div>
+      </div>
+      
     </div>
     <div id="nav">
       <h4>Navigation</h4>	
@@ -64,10 +75,27 @@ export default {
     this.slideout.on('close', () => {
       fixed.style.transition = '';
     })
+
+    setInterval(this.updateTime, 1000);
   },
   methods: {
     toggleNavigation() {
       this.slideout.toggle()
+    },
+    updateTime() {
+      let dateTime = new Date()
+
+
+      this.$data.hours = `${dateTime.getHours()}`.padStart(2, 0)
+      this.$data.minutes = `${dateTime.getMinutes()}`.padStart(2, 0)
+    }
+  },
+  data: function () {
+    let dateTime = new Date()
+
+    return {
+      hours: `${dateTime.getHours()}`.padStart(2, 0),
+      minutes: `${dateTime.getMinutes()}`.padStart(2, 0)
     }
   }
 }
@@ -107,5 +135,16 @@ export default {
 #toogleButton, #toggleButton:focus, #toggleButton:active {
   outline-width: 0;
   box-shadow: none;
+}
+
+#header .container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+#headerClock {
+  color: antiquewhite;
+  font-size: 1.8rem;
+  text-align: center;
 }
 </style>

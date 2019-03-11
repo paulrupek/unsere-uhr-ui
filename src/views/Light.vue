@@ -12,7 +12,7 @@
                     Folgende Werte sind bei der Berechnung von Bedeutung:
                 </p>
             </div>
-            <div class="col-12 col-lg-10 col-xl-9 col-xxl-6">
+            <div class="col-12 col-md-10 col-lg-12 col-xl-9 col-xxl-6">
                 <h3>Einstellungen</h3>
                 <form action="#">
                     <div class="form-group">
@@ -45,7 +45,7 @@
                     <br><br>
                 </form>
             </div>
-            <div class="col-12 col-lg-10 col-xl-9 col-xxl-6">
+            <div class="col-12 col-xl-9 col-xxl-6">
                 <h3>Erläuterungen</h3>
                 <p>
                     <ul>
