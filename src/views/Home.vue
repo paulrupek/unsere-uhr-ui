@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10 col-xl-8 col-xxl-6">
         <uu-clock :leds="clockStatus.ledValues" :configuration="ledLayout"></uu-clock>
       </div>
     </div>

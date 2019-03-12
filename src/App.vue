@@ -52,7 +52,8 @@ export default {
       tolerance: 70
     })
 
-    let fixed = document.querySelector('#header');
+    let slide = this.slideout
+    let fixed = document.querySelector('#header')
 
     this.slideout.on('translate', (translated) => {
       fixed.style.transform = 'translateX(' + translated + 'px)'
@@ -69,14 +70,16 @@ export default {
     })
 
     this.slideout.on('open', () => {
-      fixed.style.transition = '';
+      fixed.style.transition = ''
     })
 
     this.slideout.on('close', () => {
-      fixed.style.transition = '';
+      fixed.style.transition = ''
     })
 
     setInterval(this.updateTime, 1000);
+
+    this.$router.afterEach(() => slide.close())
   },
   methods: {
     toggleNavigation() {
