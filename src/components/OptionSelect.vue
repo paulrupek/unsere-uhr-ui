@@ -3,7 +3,7 @@
     <div class="optionSelect row">
         <div class="option d-sm-none col-6"
              v-for="option in opts"
-             v-bind:key="option.id"
+             v-bind:key="'xs' + option.id"
              v-on:click="selectOption($event, option)">
              
             <div class="card" :class="{ selected: option.selected }">
