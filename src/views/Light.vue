@@ -100,7 +100,8 @@ export default {
     },
     data() {
         return {
-            data: {}
+            data: {},
+            history: {}
         }
     },
     mounted() {
@@ -111,7 +112,19 @@ export default {
         })
         .then(x => x.json())
         .then(resp => {
-            component.data = resp
+            component.$data.data = resp
+        })
+        .catch(() => { 
+
+        })
+
+        fetch('http://127.0.0.1:8081/light', {
+            
+        })
+        .then(x => x.json())
+        .then(resp => {
+            console.log('/light', resp)
+            component.$data.history = resp
         })
         .catch(() => { 
 

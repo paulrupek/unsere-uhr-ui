@@ -51,8 +51,7 @@ export default {
     },
     data() {
         return {
-            data: {},
-
+            data: {}
         }
     },
     methods: {
@@ -93,7 +92,8 @@ export default {
         })
         .then(x => x.json())
         .then(resp => {
-            component.data = resp
+            console.log("/setting/brightness/", resp)
+            component.$data.data = resp
         })
         .catch(() => { 
 
