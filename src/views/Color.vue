@@ -8,6 +8,11 @@
                 <p>
                     Hier können die Farbwerte der Uhr eingestellt werden.
                 </p>
+                <uu-alert type="error" ref="readError">
+                    <p>Die aktuellen Einstellungen der Uhr konnten nicht gelesen werden. Das Speichern
+                    der Einstellungen wurde deswegen deaktiviert.</p>
+                    <p>{{ readError }}</p>
+                </uu-alert>
             </div>
         </div>
 
@@ -40,7 +45,7 @@
                         </option>
                     </select><br>
                     <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ '#' + data[selectedLed].toString(16) }}</p>
-                    <button type="submit" class="btn btn-primary mb-2">Speichern</button>
+                    <button type="submit" :disabled="disabled" class="btn btn-primary mb-2">Speichern</button>
                 </div>
             </form>
             </div>
@@ -50,21 +55,25 @@
 
 <script>
 import Clock from '@/components/Clock.vue'
+import Alert from '@/components/Alert.vue'
 const AColorPicker = require('a-color-picker')
 
 export default {
     components: {
-        'uu-clock': Clock
+        'uu-clock': Clock,
+        'uu-alert': Alert
     },
     data() {
         return {
             data: {},
             selectedLed: -1,
-            color: '#ffffff'
+            color: '#ffffff',
+            disabled: false,
+            readError: ''
         }
     },
     methods: {
-        globalColorChanged(picker, color) {
+        globalColorChanged(picker) {
             let newColor = parseInt(picker.color.substring(1), 16)
 
             for (const key in this.$data.data) {
@@ -101,9 +110,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:8081/settings/color', {
-            
-        })
+        fetch('http://127.0.0.1:8081/settings/color')
         .then(x => x.json())
         .then(resp => {
             component.data = resp
@@ -123,7 +130,9 @@ export default {
             component._colorPicker.on('change', component.globalColorChanged)
         })
         .catch((e) => { 
-            console.log(e)
+            component.$refs.readError.open()
+            component.$data.disabled = true
+            component.$data.readError = e
         })
     },
     beforeDestroy() {

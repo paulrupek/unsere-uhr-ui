@@ -11,6 +11,10 @@
             </div>
 
             <div class="col-12 col-md-8 col-xl-7 col-xxl-5">
+                <uu-alert type="error" ref="readError">
+                    Die aktuellen Einstellungen der Uhr konnten nicht gelesen werden.
+                    Das Speichern wurde sicherheitshalber deaktiviert.
+                </uu-alert>
                 <uu-alert type="success" ref="successAlert">
                     Die Einstellungen wurden erfolgreich angepasst.
                 </uu-alert>
@@ -35,7 +39,7 @@
                            Dieses Feature ist leider noch nicht implementiert.
                         </div>
                     </div>
-                    <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
+                    <button type="submit" @click="submitData" :disabled="disabled" class="btn btn-primary">Speichern</button>
                 </form>
             </div>
         </div>
@@ -51,7 +55,8 @@ export default {
     },
     data() {
         return {
-            data: {}
+            data: {},
+            disabled: false
         }
     },
     methods: {
@@ -66,8 +71,8 @@ export default {
             fetch('http://127.0.0.1:8081/settings/brightness', {
                 method: 'put',
                 headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(this.$data.data)
             })
@@ -92,11 +97,11 @@ export default {
         })
         .then(x => x.json())
         .then(resp => {
-            console.log("/setting/brightness/", resp)
             component.$data.data = resp
         })
         .catch(() => { 
-
+            component.$refs.readError.open()
+            component.$data.disabled = true
         })
     }
 }

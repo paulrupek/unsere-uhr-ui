@@ -71,23 +71,9 @@ $container-max-widths: map-merge(
   top: 0;
   bottom: 0;
   width: 20rem;
-
-  .list-group-item {
-    /*background-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.9);
-
-    &:hover {
-      border-left: solid #6e4ec4 5px;
-      background-color:  rgba(255, 255, 255, 0.3);
-    }*/
-  }
 }
 
 @include media-breakpoint-up(lg) {
-  .slideout-panel {
-    
-  }
-
   #main-container {
     margin-left: 20rem;
     transform: initial !important;

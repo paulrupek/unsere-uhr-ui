@@ -14,6 +14,10 @@
             </div>
             <div class="col-12 col-md-10 col-lg-12 col-xl-9 col-xxl-6">
                 <h3>Einstellungen</h3>
+                <uu-alert type="error" ref="errorReadAlert">
+                    Die aktuellen Einstellungen der Uhr konnten nicht gelesen werden. Das Speichern
+                    der Einstellungen wurde deswegen deaktiviert. 
+                </uu-alert>
                 <form action="#">
                     <div class="form-group">
                         <label for="timeSpan">Zeitspanne</label>
@@ -41,7 +45,7 @@
                     <uu-alert type="error" ref="errorAlert">
                         Ein Fehler ist beim Speichern aufgetreten.
                     </uu-alert>
-                    <button type="submit" @click="submitData" class="btn btn-primary">Speichern</button>
+                    <button type="submit" @click="submitData" :disabled="disabled" class="btn btn-primary">Speichern</button>
                     <br><br>
                 </form>
             </div>
@@ -101,33 +105,31 @@ export default {
     data() {
         return {
             data: {},
-            history: {}
+            history: {},
+            disabled: false
         }
     },
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:8081/settings/light', {
-            
-        })
+        fetch('http://127.0.0.1:8081/settings/light')
         .then(x => x.json())
         .then(resp => {
             component.$data.data = resp
         })
         .catch(() => { 
-
+            component.$refs.errorReadAlert.open()
+            component.$data.disabled = true
         })
 
-        fetch('http://127.0.0.1:8081/light', {
-            
-        })
+        fetch('http://127.0.0.1:8081/light')
         .then(x => x.json())
         .then(resp => {
-            console.log('/light', resp)
             component.$data.history = resp
         })
         .catch(() => { 
-
+            component.$refs.errorReadAlert.open()
+            component.$data.disabled = true
         })
     },
     methods: {

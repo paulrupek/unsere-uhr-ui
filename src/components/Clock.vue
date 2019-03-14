@@ -217,7 +217,7 @@ export default {
             document.querySelectorAll(toQueryString(newValue)).forEach(x => x.style.color = 'white')
         })
 
-        this.$watch('color', (newValue, oldValue) => {
+        this.$watch('color', (newValue) => {
             document.querySelectorAll('.clock .col, .clock .col-1').forEach(x => x.style.color = `#${newValue.toString(16)}`)
         })
     },
