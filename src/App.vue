@@ -147,7 +147,8 @@ export default {
 
 #headerClock {
   color: antiquewhite;
-  font-size: 1.8rem;
+  font-size: 1.6rem !important;
   text-align: center;
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
 }
 </style>
