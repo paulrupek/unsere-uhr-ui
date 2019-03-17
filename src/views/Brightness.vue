@@ -34,7 +34,7 @@
                         <small id="fixedValueStrategyHelp" class="form-text text-muted">Bitte einen Helligkeitswert zwischen 0 und 100 erfassen.</small>
                     </div>
 
-                    <div v-if="data.strategy === 'SCHEDULE'" class="form-group">
+                    <div v-if="data.strategy === 'SCHEDULE' || data.strategy === 'SCHEDULE_AMBIENT'" class="form-group">
                         <div class="alert alert-warning" role="alert">
                            Dieses Feature ist leider noch nicht implementiert.
                         </div>
