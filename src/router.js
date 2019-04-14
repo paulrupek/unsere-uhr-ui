@@ -5,6 +5,7 @@ import Color from './views/Color.vue'
 import Light from './views/Light.vue'
 import Brightness from './views/Brightness.vue'
 import Text from './views/Text.vue'
+import AmbientSensor from '@/views/AmbientSensor.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/text',
       name: 'text',
       component: Text
+    },
+    {
+      path: '/ambient-sensor',
+      name: 'ambient-sensor',
+      component: AmbientSensor
     }
   ]
 })
