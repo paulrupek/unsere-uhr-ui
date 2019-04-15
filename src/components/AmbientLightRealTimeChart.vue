@@ -1,5 +1,6 @@
 <script>
 import { Line } from 'vue-chartjs'
+import io from 'socket.io-client'
 import 'chartjs-plugin-streaming'
 
 var chartColors = {
@@ -28,6 +29,11 @@ function onRefresh(chart) {
 export default {
     extends: Line,
     mounted() {
+        const socket = io('http://localhost:8081')
+        socket.on('connect', () => console.log('connected'))
+        socket.on('event', x => console.log('event', x))
+        socket.on('disconnect', () => console.log('disconnected'))
+
         this.renderChart({
             datasets: [
                 {
