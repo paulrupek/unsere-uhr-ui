@@ -24,6 +24,7 @@
 <script>
 import Clock from '@/components/Clock.vue'
 import Alert from '@/components/Alert.vue'
+import { baseUri } from '@/util/api'
 
 export default {
   name: 'home',
@@ -43,7 +44,7 @@ export default {
   mounted() {
     let component = this
 
-    fetch('http://127.0.0.1:8081/settings/led-layout')
+    fetch(baseUri + '/settings/led-layout')
     .then(x => x.json())
     .then(resp => {
       component.$data.ledLayout = resp
@@ -54,7 +55,7 @@ export default {
     })
 
     this.$data.intervalId = setInterval(() => {
-      fetch('http://127.0.0.1:8081/status/clock')
+      fetch(baseUri + '/status/clock')
       .then(x => x.json())
       .then(resp => {
           component.$data.clockStatus = resp

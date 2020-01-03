@@ -97,6 +97,7 @@
 
 <script>
 import Alert from '@/components/Alert.vue'
+import { baseUri } from '@/util/api'
 
 export default {
     components: {
@@ -112,7 +113,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:8081/settings/light')
+        fetch(baseUri + '/settings/light')
         .then(x => x.json())
         .then(resp => {
             component.$data.data = resp
@@ -122,7 +123,7 @@ export default {
             component.$data.disabled = true
         })
 
-        fetch('http://127.0.0.1:8081/light')
+        fetch(baseUri + '/light')
         .then(x => x.json())
         .then(resp => {
             component.$data.history = resp
@@ -139,7 +140,7 @@ export default {
             this.$refs.errorAlert.close()
 
             // PUT data
-            fetch('http://127.0.0.1:8081/settings/light', {
+            fetch(baseUri + '/settings/light', {
                 method: 'put',
                 headers: {
                 'Accept': 'application/json',

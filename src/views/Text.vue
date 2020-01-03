@@ -30,6 +30,7 @@
 <script>
 import OptionSelect from '@/components/OptionSelect.vue'
 import Alert from '@/components/Alert.vue'
+import { baseUri } from '@/util/api'
 
 export default {
   name: 'TextSettings',
@@ -54,7 +55,7 @@ export default {
       });
 
       // PUT settings
-      fetch('http://127.0.0.1:8081/settings/text', {
+      fetch(baseUri + '/settings/text', {
         method: 'put',
         headers: {
           'Accept': 'application/json',
@@ -84,7 +85,7 @@ export default {
   mounted() {
     let component = this
 
-    fetch('http://127.0.0.1:8081/settings/text', {
+    fetch(baseUri + '/settings/text', {
         
     })
     .then(x => x.json())

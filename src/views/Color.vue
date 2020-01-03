@@ -56,6 +56,7 @@
 <script>
 import Clock from '@/components/Clock.vue'
 import Alert from '@/components/Alert.vue'
+import { baseUri } from '@/util/api'
 const AColorPicker = require('a-color-picker')
 
 export default {
@@ -110,7 +111,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:8081/settings/color')
+        fetch(baseUri + '/settings/color')
         .then(x => x.json())
         .then(resp => {
             component.data = resp

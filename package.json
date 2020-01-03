@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "a-color-picker": "^1.1.7",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.4.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-streaming": "^1.8.0",
     "feather-icons": "^4.19.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "popper.js": "^1.14.7",
     "register-service-worker": "^1.5.2",
     "slideout": "^1.0.1",

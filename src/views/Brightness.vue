@@ -48,6 +48,7 @@
 
 <script>
 import Alert from '@/components/Alert.vue'
+import { baseUri } from '@/util/api'
 
 export default {
     components: {
@@ -68,7 +69,7 @@ export default {
             this.$refs.errorAlert.close()
 
             // PUT data
-            fetch('http://127.0.0.1:8081/settings/brightness', {
+            fetch(baseUri + '/settings/brightness', {
                 method: 'put',
                 headers: {
                     'Accept': 'application/json',
@@ -92,7 +93,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch('http://127.0.0.1:8081/settings/brightness', {
+        fetch(baseUri + '/settings/brightness', {
             
         })
         .then(x => x.json())
