@@ -1,5 +1,9 @@
 {
   "name": "unsere-uhr-ui",
+  "author": {
+    "name": "Paul Rupek",
+    "url": "https://www.rupek.net"
+  },
   "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,7 +19,7 @@
     "chartjs-plugin-streaming": "^1.8.0",
     "feather-icons": "^4.19.0",
     "jquery": "^3.4.1",
-    "popper.js": "^1.14.7",
+    "popper.js": "^1.16.0",
     "register-service-worker": "^1.5.2",
     "slideout": "^1.0.1",
     "socket.io-client": "^2.2.0",

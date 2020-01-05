@@ -1,0 +1,8 @@
+# source folders
+/public
+/src
+/tests
+
+# config files
+babel.config.js
+cypress.json
