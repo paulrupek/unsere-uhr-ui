@@ -88,7 +88,6 @@ export default {
     updateTime() {
       let dateTime = new Date()
 
-
       this.$data.hours = `${dateTime.getHours()}`.padStart(2, 0)
       this.$data.minutes = `${dateTime.getMinutes()}`.padStart(2, 0)
     }

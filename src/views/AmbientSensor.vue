@@ -41,7 +41,7 @@ export default {
     mounted() {
         let component = this
 
-        fetch(baseUri + '/settings/light')
+        fetch(baseUri + '/settings/light', { mode: 'cors' })
         .then(x => x.json())
         .then(resp => {
             component.$data.data = resp
@@ -51,7 +51,7 @@ export default {
             component.$data.disabled = true
         })
 
-        fetch(baseUri + '/light')
+        fetch(baseUri + '/light', { mode: 'cors' })
         .then(x => x.json())
         .then(resp => {
             component.$data.history = resp

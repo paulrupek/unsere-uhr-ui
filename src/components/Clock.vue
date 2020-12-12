@@ -195,7 +195,7 @@ export default {
             const result = []
 
             for (const key in this.configuration) {
-                if (this.configuration.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(this.configuration, key)) {
                     const element = this.configuration[key];
                 
                     if (element.every(idx => this.leds[idx] > 0)) {

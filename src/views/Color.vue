@@ -78,7 +78,7 @@ export default {
             let newColor = parseInt(picker.color.substring(1), 16)
 
             for (const key in this.$data.data) {
-                if (this.$data.data.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(this.$data.data, key)) {
                     this.$data.data[key] = newColor
                 }
             }
@@ -90,7 +90,7 @@ export default {
             let max = null
 
             for (const key in colors) {
-                if (colors.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(colors, key)) {
                     let color = colors[key];
                     
                     if (!counter[color]) {
