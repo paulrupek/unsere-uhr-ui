@@ -34,10 +34,8 @@
                         <small id="fixedValueStrategyHelp" class="form-text text-muted">Bitte einen Helligkeitswert zwischen 0 und 100 erfassen.</small>
                     </div>
 
-                    <div v-if="data.strategy === 'SCHEDULE' || data.strategy === 'SCHEDULE_AMBIENT'" class="form-group">
-                        <div class="alert alert-warning" role="alert">
-                           Dieses Feature ist leider noch nicht implementiert.
-                        </div>
+                    <div v-if="data.strategy === 'SCHEDULE'" class="form-group">
+                        Die Helligkeitswerte werden entsprechend des <router-link to="/brightness/schedule">konfigurierten Zeitplans</router-link> verwendet. 
                     </div>
                     <button type="submit" @click="submitData" :disabled="disabled" class="btn btn-primary">Speichern</button>
                 </form>

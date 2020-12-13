@@ -6,6 +6,7 @@ import Light from './views/Light.vue'
 import Brightness from './views/Brightness.vue'
 import Text from './views/Text.vue'
 import AmbientSensor from '@/views/AmbientSensor.vue'
+import Schedule from '@/views/Schedule.vue'
 
 Vue.use(Router)
 
@@ -40,9 +41,14 @@ export default new Router({
       component: Text
     },
     {
-      path: '/ambient-sensor',
+      path: '/light/sensor',
       name: 'ambient-sensor',
       component: AmbientSensor
+    },
+    {
+      path: '/brightness/schedule',
+      name: 'schedule',
+      component: Schedule
     }
   ]
 })
