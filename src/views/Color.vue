@@ -45,7 +45,7 @@
                         </option>
                     </select><br>
                     <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ '#' + data[selectedLed].toString(16) }}</p>
-                    <button type="submit" :disabled="disabled" class="btn btn-primary mb-2">Speichern</button>
+                    <button type="submit" :disabled="disabled" class="btn btn-primary mb-2" @click.prevent="saveColor">Speichern</button>
                 </div>
             </form>
             </div>
@@ -66,7 +66,7 @@ export default {
     },
     data() {
         return {
-            data: {},
+            data: [],
             selectedLed: -1,
             color: '#ffffff',
             disabled: false,
@@ -77,10 +77,8 @@ export default {
         globalColorChanged(picker) {
             let newColor = parseInt(picker.color.substring(1), 16)
 
-            for (const key in this.$data.data) {
-                if (Object.prototype.hasOwnProperty.call(this.$data.data, key)) {
-                    this.$data.data[key] = newColor
-                }
+            for(let i = 0; i < this.$data.data.length; i += 1) {
+                this.$data.data[i] = newColor
             }
 
             this.$data.color = newColor
@@ -89,23 +87,31 @@ export default {
             let counter = {}
             let max = null
 
-            for (const key in colors) {
-                if (Object.prototype.hasOwnProperty.call(colors, key)) {
-                    let color = colors[key];
-                    
-                    if (!counter[color]) {
-                        counter[color] = 0
-                    }
+            for (let i = 0; i < this.$data.data.length; i += 1) {
+                let color = colors[i]
+                
+                if (!counter[color]) {
+                    counter[color] = 0
+                }
 
-                    counter[color] += 1
+                counter[color] += 1
 
-                    if (max == null || counter[color] > counter[max]) {
-                        max = color
-                    }
+                if (max == null || counter[color] > counter[max]) {
+                    max = color
                 }
             }
-
+            
             return max
+        },
+        saveColor() {
+            fetch(baseUri + '/settings/color', {
+                method: 'put',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.$data.data)
+            })
         }
     },
     mounted() {
