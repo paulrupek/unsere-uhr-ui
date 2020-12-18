@@ -45,6 +45,10 @@
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
   },
+  "np": {
+		"yarn": false,
+		"contents": "dist"
+	},
   "eslintConfig": {
     "root": true,
     "env": {
