@@ -24,6 +24,7 @@
         <router-link class="list-group-item list-group-item-action" to="/color">Farbeinstellungen</router-link>
         <router-link class="list-group-item list-group-item-action" to="/light">Umgebungslicht</router-link>
         <router-link class="list-group-item list-group-item-action" to="/brightness">Helligkeit</router-link>
+        <router-link class="list-group-item list-group-item-action" to="/brightness/schedule">Zeitplan</router-link>
       </div>
       <div class="d-block d-sm-none">XS</div>
       <div class="d-none d-sm-block d-md-none">SM</div>

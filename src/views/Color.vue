@@ -87,7 +87,7 @@ export default {
             let counter = {}
             let max = null
 
-            for (let i = 0; i < this.$data.data.length; i += 1) {
+            for (let i = 0; i < colors.length; i += 1) {
                 let color = colors[i]
                 
                 if (!counter[color]) {
