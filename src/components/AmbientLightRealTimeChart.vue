@@ -1,7 +1,6 @@
 <script>
 import { Line } from 'vue-chartjs'
 import io from 'socket.io-client'
-import 'chartjs-plugin-streaming'
 
 var chartColors = {
 	red: 'rgb(255, 99, 132)',
@@ -13,64 +12,82 @@ var chartColors = {
 	grey: 'rgb(201, 203, 207)'
 }
 
-function randomScalingFactor() {
-	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-}
-
-function onRefresh(chart) {
-    chart.config.data.datasets.forEach(function(dataset) {
-		dataset.data.push({
-			x: Date.now(),
-			y: randomScalingFactor()
-		});
-	});
-}
-
 export default {
     extends: Line,
     mounted() {
-        const socket = io('http://localhost:8081')
+        const _ = this
+        const socket = io(`ws://${window.location.host}`)
         socket.on('connect', () => console.log('connected'))
-        socket.on('event', x => console.log('event', x))
         socket.on('disconnect', () => console.log('disconnected'))
 
-        this.renderChart({
-            datasets: [
-                {
-                    label: 'Dataset 1 (linear interpolation)',/*
-                    backgroundColor: this.$data._chart.helpers.color(chartColors.red).alpha(0.5).rgbString(),*/
-                    borderColor: chartColors.red,
-                    fill: false,
-                    lineTension: 0,
-                    borderDash: [8, 4],
-                    data: []
-                }, {
-                    label: 'Dataset 2 (cubic interpolation)',/*
-                    backgroundColor: this.$data._chart.helpers.color(chartColors.blue).alpha(0.5).rgbString(),*/
-                    borderColor: chartColors.blue,
-                    fill: false,
-                    cubicInterpolationMode: 'monotone',
-                    data: []
+        let datasets = [
+            {
+                label: 'Mittelwert',
+                borderColor: chartColors.red,
+                fill: false,
+                lineTension: 0,
+                data: []
+            }, {
+                label: 'Minimum',
+                borderColor: chartColors.blue,
+                fill: false,
+                borderDash: [8, 4],
+                data: []
+            }, {
+                label: 'Maximum',
+                borderColor: chartColors.blue,
+                fill: false,
+                borderDash: [8, 4],
+                data: []
+            }
+        ]
+
+        let labels = []
+
+        const limit = 30
+
+        /**/
+
+        setTimeout(() => {
+            socket.on('ambient-light', x => {
+                datasets[0].data.push(x.reduce((p, c) => p + c, 0) / x.length)
+                datasets[1].data.push(Math.min(...x))
+                datasets[2].data.push(Math.max(...x))
+                
+                if (labels.length < limit) {
+                    labels.push('')
+                } else {
+                    datasets[0].data.shift()
+                    datasets[1].data.shift()
+                    datasets[2].data.shift()
                 }
-            ]
+
+                _.$data._chart.update()
+            })
+        }, 2000)
+
+        this.renderChart({
+            labels: labels,
+            datasets: datasets
         }, {
             title: {
                 display: true,
                 text: 'Line chart (hotizontal scroll) sample'
             },
+            responsive: true,
             scales: {
                 xAxes: [{
-                    type: 'realtime',
-                    realtime: {
-                        duration: 20000,
-                        refresh: 1000,
-                        delay: 2000,
-                        onRefresh: onRefresh
+                    ticks: {
+                        beginAtZero: true
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: {
+                    ticks: {
                         display: true,
+                        beginAtZero: true,
+                        suggestedMin: 0,
+                        suggestedMax: 1,
+                        stepSize: 0.1,
                         labelString: 'value'
                     }
                 }]
