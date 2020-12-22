@@ -14,7 +14,7 @@
             <div class="col col-xl-6">
                 <p>
                     Hier können die Zeiten konfiguriert werden in denen die Uhr aktiv ist. In Zeiträumen, die hier nicht
-                    aufgeführt sind, bleibt die Uhr dunkel. Diese Einstellungen greifen nur dann, wenn im unter 
+                    aufgeführt sind, bleibt die Uhr dunkel. Diese Einstellungen greifen nur dann, wenn unter 
                     <router-link to="/brightness">Helligkeit</router-link> <em>Schedule</em> als Strategie ausgewählt wurde.
                 </p>
                 <p>
@@ -28,7 +28,7 @@
                 </p>
                 <button @click.prevent="addElement" class="btn btn-outline-primary">Element hinzufügen</button>
                 <button type="submit" @click.prevent="submitData" class="btn btn-primary">Speichern</button>
-                <br>
+                <div class="spaceafter"></div>
                 <uu-alert type="error" ref="readError">
                     Die aktuellen Einstellungen der Uhr konnten nicht gelesen werden.
                 </uu-alert>
@@ -115,3 +115,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.spaceafter {
+    margin-bottom: 1.2rem;
+}
+</style>
