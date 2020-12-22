@@ -17,8 +17,6 @@ export default {
     mounted() {
         const _ = this
         const socket = io(`ws://${window.location.host}`)
-        socket.on('connect', () => console.log('connected'))
-        socket.on('disconnect', () => console.log('disconnected'))
 
         let datasets = [
             {
@@ -71,8 +69,8 @@ export default {
             datasets: datasets
         }, {
             title: {
-                display: true,
-                text: 'Line chart (hotizontal scroll) sample'
+                display: false,
+                text: ''
             },
             responsive: true,
             scales: {

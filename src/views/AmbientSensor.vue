@@ -1,18 +1,41 @@
 <template>
     <div id="text" class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <h1>Umgebungslicht</h1>
+            <div class="col-xl-6 order-12">
+                <h3>Gesamtsicht</h3>
                 <p>
-                    -.-
+                    In Summe zeichnet die Uhr die Lichtwerte der vergangenen 24 Stunden auf, hier aggregierten Werte:
                 </p>
+                <div class="container">
+                    <dl class="row">
+                        <dt class="col-sm-4">Durchschnitt</dt>
+                        <dd class="col-sm-8">0.4</dd>
+
+                        <dt class="col-sm-4">Maximum</dt>
+                        <dd class="col-sm-8">{{ Math.max(...history.values) }}</dd>
+
+                        <dt class="col-sm-4">Minimum</dt>
+                        <dd class="col-sm-8">{{ Math.min(...history.values) }}</dd>
+
+                        <hr>
+
+                        <dt class="col-sm-4">Aufgezeichnete Werte</dt>
+                        <dd class="col-sm-8">{{ history.values.length }}</dd>
+
+                        <dt class="col-sm-4">Zeitraum</dt>
+                        <dd class="col-sm-8">{{ (new Date(Date.now() - history.values.length * 100)).toLocaleTimeString() }} bis {{ (new Date(Date.now())).toLocaleTimeString() }}</dd>
+                    </dl>
+                </div>
+
+                <!--h3>24h Chart</h3>
+                <uu-chart class="chart24" :lightdata="history"></uu-chart-->
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <uu-chart></uu-chart>
-            </div>
-            <div class="col">
+            <div class="col-xl-6 order-1">
+                <h3>Live-Daten</h3>
+                <p>
+                    Hier werden die Daten der vergangenen 30s angezeigt. Jeder Punkt entspricht einer Sekunde, wobei pro Sekunde 10 Werte aufgezeichnet werden und jeweils
+                    das Minimum, das Maximum und der Mittelwert dargestellt werden.
+                </p>
                 <uu-rtc></uu-rtc>
             </div>
         </div>
@@ -20,45 +43,27 @@
 </template>
 
 <script>
-//import Alert from '@/components/Alert.vue'
 import AmbientLightRealTimeChart from '@/components/AmbientLightRealTimeChart.vue'
-import AmbientLightChart from '@/components/AmbientLightChart.vue'
+//import AmbientLightChart from '@/components/AmbientLightChart.vue'
 import { baseUri } from '@/util/api'
 
 export default {
     components: {
-        /*'uu-alert': Alert, */
-        'uu-chart': AmbientLightChart, 
+        /*'uu-chart': AmbientLightChart, */
         'uu-rtc': AmbientLightRealTimeChart
     },
     data() {
         return {
-            data: {},
-            history: {},
-            disabled: false
+            history: {}
         }
     },
     mounted() {
         let component = this
 
-        fetch(baseUri + '/settings/light', { mode: 'cors' })
-        .then(x => x.json())
-        .then(resp => {
-            component.$data.data = resp
-        })
-        .catch(() => { 
-            component.$refs.errorReadAlert.open()
-            component.$data.disabled = true
-        })
-
-        fetch(baseUri + '/light', { mode: 'cors' })
+        fetch(baseUri + '/status/light')
         .then(x => x.json())
         .then(resp => {
             component.$data.history = resp
-        })
-        .catch(() => { 
-            component.$refs.errorReadAlert.open()
-            component.$data.disabled = true
         })
     }
 }
@@ -67,5 +72,14 @@ export default {
 <style>
 li {
     margin-bottom: 0.4rem;
+}
+
+.chart24 {
+    height: 16rem;
+    position: relative;
+}
+
+.chart24 canvas {
+    height: 16rem;
 }
 </style>

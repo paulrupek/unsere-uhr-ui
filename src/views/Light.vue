@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="readInterval">Leseintervall</label>
-                        <input id="readInterval" class="form-control" v-model.number="data.readInterval" type="number" min="50" step="10">
+                        <input id="readInterval" class="form-control" v-model.number="data.readInterval" type="number" min="50" step="10" disabled>
                         <small id="readIntervalHelp" class="form-text text-muted">Erfassung in Millisekunden. Der Standardwert beträgt 100ms.</small>
                     </div>
                     <div class="form-group">
@@ -86,6 +86,11 @@
                     </ul>
                 </p>
 
+
+                <p>
+                    Um ein Gefühl für diese Werte zu erhalten, können die tatsächlich ausgelesenen Daten analysiert werden.
+                    Hierfür gibt es <router-link to="/light/sensor">gesonderte Seite</router-link>.
+                </p>
                 <p>
                     Zu beachten ist auch, dass der Helligkeitssensor nicht berücksichtigt wird, falls in den
                     <router-link to="/brightness">Helligkeitseinstellungen</router-link> ein fester Wert eingestellt wurde.
@@ -106,7 +111,6 @@ export default {
     data() {
         return {
             data: {},
-            history: {},
             disabled: false
         }
     },
@@ -117,16 +121,6 @@ export default {
         .then(x => x.json())
         .then(resp => {
             component.$data.data = resp
-        })
-        .catch(() => { 
-            component.$refs.errorReadAlert.open()
-            component.$data.disabled = true
-        })
-
-        fetch(baseUri + '/light')
-        .then(x => x.json())
-        .then(resp => {
-            component.$data.history = resp
         })
         .catch(() => { 
             component.$refs.errorReadAlert.open()
