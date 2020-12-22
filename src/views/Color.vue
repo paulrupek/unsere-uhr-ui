@@ -21,10 +21,10 @@
                 <h3>Gesamte Uhr</h3>
                 <div class="container">
                     <div class="row">
-                        <div class="col-9">
-                            <uu-clock :color="color"></uu-clock>
+                        <div class="col-md-9">
+                            <uu-clock class="color-clock" :color="color"></uu-clock>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <div id="colorPickerClock"></div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
 
         <div class="row spacer-bottom">
             <div class="col-lg-6 col-12">
-                <h3>Individuelle LEDs</h3>
+                <!--h3>Individuelle LEDs</h3>
                 <form>
                 <div class="form group">
                     <label for="ledSelector">LED Nummer</label>
@@ -44,11 +44,11 @@
                             {{ k }}
                         </option>
                     </select><br>
-                    <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ '#' + data[selectedLed].toString(16) }}</p>
+                    <p v-if="selectedLed >= 0">Die LED mit der Nummer {{ selectedLed }} hat die Farbe {{ '#' + data[selectedLed].toString(16) }}</p-->
                     <button type="submit" :disabled="disabled" class="btn btn-primary mb-2" @click.prevent="saveColor">Speichern</button>
                 </div>
-            </form>
-            </div>
+            <!--/form>
+            </div-->
         </div>
     </div>
 </template>
@@ -151,5 +151,9 @@ export default {
 <style scoped>
 .spacer-bottom {
     margin-bottom: 1rem;
+}
+
+.color-clock {
+    margin-bottom: 2rem
 }
 </style>

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col col-xl-6">
                 <template v-for="item in items">
-                    <active-time-item :value="item" :key="item.id"></active-time-item>
+                    <active-time-item :value="item" :key="item.id" @delete="onDelete" @input="onChange"></active-time-item>
                 </template>
             </div>
             <div class="col col-xl-6">
@@ -79,6 +79,13 @@ export default {
         })
     },
     methods: {
+        onDelete(item) {
+            this.$data.items = this.$data.items.filter(x => x.id !== item.id)
+            console.log(this.$data.items)
+        },
+        onChange() {
+
+        },
         addElement() {
             console.log(this.$data.items[0].id)
 
