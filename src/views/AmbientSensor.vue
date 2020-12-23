@@ -54,7 +54,11 @@ export default {
     },
     data() {
         return {
-            history: {}
+            average: '',
+            min: '',
+            max: '',
+            samples: '',
+            timespan: ''
         }
     },
     mounted() {
@@ -63,7 +67,11 @@ export default {
         fetch(baseUri + '/status/light')
         .then(x => x.json())
         .then(resp => {
-            component.$data.history = resp
+            component.$data.average = resp.average
+            component.$data.min = resp.min
+            component.$data.max = resp.max
+            component.$data.samples = resp.samples
+            component.$data.timespan = resp.timespan
         })
     }
 }
