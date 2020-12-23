@@ -9,21 +9,21 @@
                 <div class="container">
                     <dl class="row">
                         <dt class="col-sm-4">Durchschnitt</dt>
-                        <dd class="col-sm-8">0.4</dd>
+                        <dd class="col-sm-8">{{ average }}</dd>
 
                         <dt class="col-sm-4">Maximum</dt>
-                        <dd class="col-sm-8">{{ Math.max(...history.values) }}</dd>
+                        <dd class="col-sm-8">{{ max }}</dd>
 
                         <dt class="col-sm-4">Minimum</dt>
-                        <dd class="col-sm-8">{{ Math.min(...history.values) }}</dd>
+                        <dd class="col-sm-8">{{ min }}</dd>
 
                         <hr>
 
                         <dt class="col-sm-4">Aufgezeichnete Werte</dt>
-                        <dd class="col-sm-8">{{ history.values.length }}</dd>
+                        <dd class="col-sm-8">{{ samples }}</dd>
 
                         <dt class="col-sm-4">Zeitraum</dt>
-                        <dd class="col-sm-8">{{ (new Date(Date.now() - history.values.length * 100)).toLocaleTimeString() }} bis {{ (new Date(Date.now())).toLocaleTimeString() }}</dd>
+                        <dd class="col-sm-8">{{ timespan }}</dd>
                     </dl>
                 </div>
 

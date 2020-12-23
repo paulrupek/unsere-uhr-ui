@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.1f4ee729016de9912d65b079c9892fd9.js"
+  "/precache-manifest.2d8fbe600b2d613b7b8b71390cc051ca.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "unsere-uhr-ui"});
