@@ -1,6 +1,6 @@
 {
   "name": "unsere-uhr-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": {
     "name": "Paul Rupek",
     "url": "https://www.rupek.net"
@@ -12,9 +12,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "a-color-picker": "^1.1.7",
     "bootstrap": "^4.4.1",
