@@ -32,6 +32,7 @@
       <div class="d-none d-lg-block d-xl-none">LG</div>
       <div class="d-none d-xl-block d-xxl-none">XL</div>
       <div class="d-none d-xxl-block">XXL</div>
+      v1.0.4
     </div>
     <div id="main-container">
       <router-view />
